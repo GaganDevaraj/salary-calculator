@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+        integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+
+    <title>CTC Calculator</title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand" href="#">Project by: Gagan Dev
+        </a>
+        <div>
+            <h1>₹ CTC Calculator</h1>
+        </div>
+    </nav>
+
+    <div>
+        <div class="mt-2 ml-4 mr-4">
+            <div class="row">
+                <div class="col-5">
+                    <div class="card border-info">
+                        <div class="card-header bg-info text-white">
+                            Provide your information with yearly CTC
+                        </div>
+                        <div class="card-body">
+                            <form onsubmit="return calculateCTC()" action="#">
+                                <div class="form-group">
+                                    <label for="fullName">Full name</label>
+                                    <input type="text" class="form-control" id="fullName" name="fullName">
+                                    <small id="nameError" class="text-danger"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="companyName">Company name</label>
+                                    <input type="text" class="form-control" id="companyName" name="companyName">
+                                    <small id="companyError" class="text-danger"></small>
+                                    <small id="companyError" class="text-danger"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="yearlyCTC">Enter you CTC</label>
+                                    <input type="number" class="form-control" id="yearlyCTC" name="yearlyCTC">
+                                    <small id="ctcError" class="text-danger"></small>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button type="reset" class="btn btn-warning mr-2">Reset</button>
+                                    <button type="submit" class="btn btn-info ">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="card border-success mt-2">
+                        <div class="card-header bg-success text-white">
+                            INCOME SLAB AND TAX RATES FOR F.Y. 2020-21/A.Y 2021-22
+                        </div>
+                        <div class="m-2">
+                            <table class="table table-sm mb-0">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Taxable income</th>
+                                    <th scope="col">Tax (Existing)</th>
+                                    <th scope="col">Tax (New)</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <td>Up to Rs. 2,50,000</td>
+                                    <td>Nil</td>
+                                    <td>Nil</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Rs. 2,50,001 to Rs. 5,00,000</td>
+                                    <td>5%</td>
+                                    <td>5%</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Rs. 5,00,001 to Rs. 7,50,000</td>
+                                    <td>20%</td>
+                                    <td>10%</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Rs. 7,50,001 to Rs. 10,00,000</td>
+                                    <td>20%</td>
+                                    <td>15%</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Rs. 10,00,001 to Rs. 12,50,000</td>
+                                    <td>30%</td>
+                                    <td>20%</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Rs. 12,50,001 to Rs. 15,00,000</td>
+                                    <td>30%</td>
+                                    <td>25%</td>
+                                  </tr>
+                                  <tr>
+                                    <td>Above Rs. 15,00,000</td>
+                                    <td>30%</td>
+                                    <td>30%</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-7">
+                    <div class="card border-secondary">
+                        <div class="card-header bg-dark text-white">
+                            Salary Structure:
+                        </div>
+                        <div class="card-body">
+                            <div>
+                                <dl class="row">
+                                    <dt class="col-sm-3">Employee Name: </dt>
+                                    <dd class="col-sm-9" id="empName"></dd>
+
+                                    <dt class="col-sm-3">Company name: </dt>
+                                    <dd class="col-sm-9" id="cmpName"></dd>
+
+                                    <dt class="col-sm-3">Yearly CTC: </dt>
+                                    <dd class="col-sm-9" id="ctc"></dd>
+                                </dl>
+                            </div>
+
+                            <table class="table table-bordered table-sm text-center">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Particulars</th>
+                                    <th scope="col">Monthly</th>
+                                    <th scope="col">Yearly</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <tr>
+                                    <th scope="row">Total Gross Pay</th>
+                                    <td id="monthlyGrossPay"></td>
+                                    <td id="yearlyGrossPay"></td>
+                                  </tr>
+                                </tbody>
+                              </table>
+
+                            <table class="table table-borderless table-sm">
+                                <thead class="border-top border-bottom bg-light">
+                                    <tr>
+                                        <th scope="col">Deductions</th>
+                                        <th scope="col">Monthly</th>
+                                        <th scope="col">Yearly</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Professional Tax</td>
+                                        <td id="monthlyProfessionalTax"></td>
+                                        <td id="yearlyProfessionalTax"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employer PF</td>
+                                        <td id="monthlyEmployerPF"></td>
+                                        <td id="yearlyEmployerPF"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employee PF</td>
+                                        <td id="monthlyEmployeePF"></td>
+                                        <td id="yearlyEmployeePF"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Employee Insurance</td>
+                                        <td id="monthlyEmployeeInsurance"></td>
+                                        <td id="yearlyEmployeeInsurance"></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Additional deduction</td>
+                                        <td id="monthlyAdditionalDeduction"></td>
+                                        <td id="yearlyAdditionalDeduction"></td>
+                                    </tr>
+                                    <tr class="border-top border-bottom">
+                                        <th>Sub total</th>
+                                        <td id="monthlySubTotal"></td>
+                                        <td id="yearlySubTotal"></td>
+                                    </tr>
+                                    <tr class=" bg-light">
+                                        <th>Net Pay/ Take Home Salary</th>
+                                        <td id="monthlyTakeHome"></td>
+                                        <td id="yearlyTakeHome"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-bordered table-sm bg-info">
+                                <thead>
+                                  <tr class="text-center text-white">
+                                    <th colspan="2">Particulars</th>
+                                    <th scope="col">Yearly</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="bg-light">
+                                        <td colspan="2">Tax amount you need to pay (Existing Tax Scheme): </td>
+                                        <td id="taxAmountExisting"></td>
+                                    </tr>
+                                    <tr class="bg-light">
+                                        <td colspan="2">Tax amount you need to pay (New Tax Scheme): </td>
+                                        <td id="taxAmountNew"></td>
+                                    </tr>
+                                </tbody>
+                              </table>
+                              <strong class="text-success text-center" id="betterSlab"></strong> <br>
+                              <strong class="text-success text-center" id="save"></strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="script.js"></script>
+
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
